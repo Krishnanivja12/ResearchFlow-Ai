@@ -5,7 +5,6 @@ env/
 
 # Environment & secrets
 .env
-*.env
 
 # Python cache
 __pycache__/
