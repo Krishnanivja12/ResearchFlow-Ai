@@ -3,9 +3,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# API keys
+# API keys with validation
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
+
+# Validate API keys are present
+if not GROQ_API_KEY or GROQ_API_KEY == "your_groq_api_key_here":
+    raise ValueError(
+        "GROQ_API_KEY not found or not configured. "
+        "Please set it in your .env file. "
+        "Get your key from: https://console.groq.com/keys"
+    )
+
+if not TAVILY_API_KEY or TAVILY_API_KEY == "your_tavily_api_key_here":
+    raise ValueError(
+        "TAVILY_API_KEY not found or not configured. "
+        "Please set it in your .env file. "
+        "Get your key from: https://app.tavily.com/"
+    )
 
 # ── Free Groq models (verified as free on Groq Cloud) ──
 MODEL_MAP = {

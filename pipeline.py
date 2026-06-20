@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Dict
-import streamlit as st
+from typing import Dict, Any
+import pandas as pd
 from agents import (
     run_search, parse_search_results, run_reader, run_writer,
     run_critic, run_fact_checker, run_summarizer
@@ -9,17 +9,17 @@ from agents import (
 @dataclass
 class ResearchPipeline:
     topic: str
-    results: Dict[str, str] = field(default_factory=dict)
+    results: Dict[str, Any] = field(default_factory=dict)
+    sources_df: pd.DataFrame = field(default_factory=pd.DataFrame)
 
     def execute_all(self):
         """Run all agents sequentially, updating the results dict."""
         # 1. Search
         self.results["search"] = run_search(self.topic)
-        # 2. Parse into DataFrame (store as string for display)
-        df = parse_search_results(self.results["search"])
-        self.results["sources_df"] = df  
+        # 2. Parse into DataFrame and store as instance attribute
+        self.sources_df = parse_search_results(self.results["search"])
         # 3. Reader
-        self.results["reader"] = run_reader(df)
+        self.results["reader"] = run_reader(self.sources_df)
         # 4. Writer
         self.results["writer"] = run_writer(self.topic, self.results["search"], self.results["reader"])
         # 5. Critic
