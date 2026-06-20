@@ -3,8 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Groq API key
+# API keys
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 # ── Free Groq models (verified as free on Groq Cloud) ──
 MODEL_MAP = {

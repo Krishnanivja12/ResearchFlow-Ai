@@ -204,35 +204,61 @@ if not st.session_state.manual_mode and st.session_state.pipeline is not None an
 if st.session_state.done and st.session_state.results:
     r = st.session_state.results
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
-    st.markdown("## Results")
+    st.markdown("## 📊 Research Results")
 
+    # Search Results in Dropdown
     if "search" in r:
-        with st.expander("🔍 Search Results (raw JSON)", expanded=False):
-            st.json(r["search"])
-        if st.session_state.sources_df is not None and not st.session_state.sources_df.empty:
-            st.dataframe(st.session_state.sources_df, use_container_width=True)
+        with st.expander("🔍 Search Results - Real-Time Sources", expanded=False):
+            st.markdown("**Found Sources from Tavily API:**")
+            if st.session_state.sources_df is not None and not st.session_state.sources_df.empty:
+                # Display as a nice table
+                df = st.session_state.sources_df
+                st.dataframe(
+                    df,
+                    use_container_width=True,
+                    column_config={
+                        "url": st.column_config.LinkColumn("URL"),
+                        "reliability_score": st.column_config.NumberColumn(
+                            "Reliability",
+                            help="Score from 1-10",
+                            format="%.0f ⭐"
+                        )
+                    }
+                )
+            else:
+                st.json(r["search"])
 
+    # Reader Content in Dropdown
     if "reader" in r:
-        with st.expander("📄 Scraped Content", expanded=False):
-            st.text_area("Reader Output", r["reader"], height=200)
+        with st.expander("📄 Scraped Content - Detailed Information", expanded=False):
+            st.markdown("**Content extracted from top sources:**")
+            st.text_area("Reader Output", r["reader"], height=300, label_visibility="collapsed")
 
+    # Main Report (always visible)
     if "writer" in r:
-        st.markdown("### 📝 Final Report")
+        st.markdown("### 📝 Final Research Report")
         st.markdown(r["writer"])
+        
+        # White Download Button
         st.download_button(
-            "⬇ Download Report",
-            r["writer"],
-            file_name=f"report_{st.session_state.topic.replace(' ', '_')}.md",
+            label="⬇️ Download Report (Markdown)",
+            data=r["writer"],
+            file_name=f"research_report_{st.session_state.topic.replace(' ', '_')}.md",
+            mime="text/markdown",
+            use_container_width=True,
         )
 
+    # Critic Feedback in Dropdown
     if "critic" in r:
-        with st.expander("🧐 Critic Feedback"):
+        with st.expander("🧐 Critic Feedback - Quality Review", expanded=False):
             st.info(r["critic"])
 
+    # Fact-Check Results in Dropdown
     if "fact_checker" in r:
-        with st.expander("✅ Fact‑Check Results"):
+        with st.expander("✅ Fact-Check Results - Source Verification", expanded=False):
             st.warning(r["fact_checker"])
 
+    # Executive Summary (highlighted)
     if "summary" in r:
         st.markdown("### 📑 Executive Summary")
         st.success(r["summary"])

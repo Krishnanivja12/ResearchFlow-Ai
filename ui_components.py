@@ -126,6 +126,32 @@ def load_css():
         transform: translateY(0) !important;
     }
 
+    /* ── Download Button (White/Visible) ── */
+    .stDownloadButton > button {
+        background: linear-gradient(135deg, #ffffff 0%, #f0ebe0 100%) !important;
+        color: #0a0a0f !important;
+        font-family: 'Syne', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.04em !important;
+        border: 2px solid rgba(255,140,50,0.3) !important;
+        border-radius: 10px !important;
+        padding: 0.7rem 2.2rem !important;
+        cursor: pointer !important;
+        transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s !important;
+        box-shadow: 0 4px 20px rgba(255,255,255,0.15) !important;
+        width: 100%;
+    }
+    .stDownloadButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 28px rgba(255,255,255,0.25) !important;
+        background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%) !important;
+        border-color: #ff8c32 !important;
+    }
+    .stDownloadButton > button:active {
+        transform: translateY(0) !important;
+    }
+
     /* ── Pipeline step cards ── */
     .step-card {
         background: rgba(255,255,255,0.03);
@@ -251,12 +277,37 @@ def load_css():
     .stSpinner > div { color: #ff8c32 !important; }
 
     /* ── Expander ── */
+    .streamlit-expanderHeader {
+        background: rgba(255,255,255,0.03) !important;
+        border: 1px solid rgba(255,140,50,0.15) !important;
+        border-radius: 10px !important;
+        color: #f0ebe0 !important;
+        font-family: 'DM Sans', sans-serif !important;
+        font-weight: 500 !important;
+        padding: 1rem 1.5rem !important;
+        transition: all 0.2s !important;
+    }
+    .streamlit-expanderHeader:hover {
+        background: rgba(255,140,50,0.05) !important;
+        border-color: rgba(255,140,50,0.3) !important;
+    }
+    .streamlit-expanderContent {
+        background: rgba(255,255,255,0.02) !important;
+        border: 1px solid rgba(255,140,50,0.1) !important;
+        border-top: none !important;
+        border-radius: 0 0 10px 10px !important;
+        padding: 1.5rem !important;
+        margin-top: -1px !important;
+    }
     details summary {
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.75rem !important;
-        color: #a09890 !important;
-        letter-spacing: 0.1em !important;
+        font-family: 'DM Sans', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #f0ebe0 !important;
+        letter-spacing: 0.02em !important;
         cursor: pointer;
+    }
+    details[open] summary {
+        color: #ff8c32 !important;
     }
 
     /* ── Section heading ── */
@@ -276,6 +327,60 @@ def load_css():
         text-align: center;
         margin-top: 3rem;
         letter-spacing: 0.08em;
+    }
+
+    /* ── DataFrame styling ── */
+    .stDataFrame {
+        background: rgba(255,255,255,0.02) !important;
+        border-radius: 10px !important;
+    }
+    .stDataFrame [data-testid="stDataFrameResizable"] {
+        background: rgba(255,255,255,0.02) !important;
+    }
+    .stDataFrame table {
+        color: #e8e4dc !important;
+    }
+    .stDataFrame thead tr th {
+        background: rgba(255,140,50,0.1) !important;
+        color: #ff8c32 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-weight: 600 !important;
+        border-bottom: 2px solid rgba(255,140,50,0.3) !important;
+    }
+    .stDataFrame tbody tr:hover {
+        background: rgba(255,140,50,0.05) !important;
+    }
+
+    /* ── Text Area ── */
+    .stTextArea textarea {
+        background: rgba(255,255,255,0.03) !important;
+        border: 1px solid rgba(255,140,50,0.15) !important;
+        border-radius: 10px !important;
+        color: #e8e4dc !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+    }
+
+    /* ── Info/Warning/Success boxes ── */
+    .stAlert {
+        background: rgba(255,255,255,0.03) !important;
+        border-radius: 10px !important;
+        border-left: 4px solid !important;
+        padding: 1.2rem 1.5rem !important;
+        font-family: 'DM Sans', sans-serif !important;
+    }
+    .stAlert[data-baseweb="notification"] {
+        background: rgba(255,255,255,0.03) !important;
+    }
+    [data-testid="stNotificationContentInfo"] {
+        border-left-color: #4a9eff !important;
+    }
+    [data-testid="stNotificationContentWarning"] {
+        border-left-color: #ffa500 !important;
+    }
+    [data-testid="stNotificationContentSuccess"] {
+        border-left-color: #50c878 !important;
     }
     </style>
     """, unsafe_allow_html=True)

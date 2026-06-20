@@ -1,4 +1,16 @@
 # ResearchMind
+---
+title: ResearchMind
+emoji: 🚀
+colorFrom: blue
+colorTo: purple
+sdk: streamlit
+app_file: app.py
+pinned: false
+License: mit
+---
+
+# ResearchMind
 
 > Transform any topic into a polished, verified research report with six specialized AI agents running on **free Groq‑Cloud LLMs**.
 
@@ -73,3 +85,4 @@ flowchart TD
     H --> I[Download Report .md]
 ```
 ---
+
